@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_first_fragment">
+
+    <fragment
+        android:id="@+id/nav_first_fragment"
+        android:name="ua.com.dekalo.multimodule.featuretest1.Test1FeatureFragment"
+        tools:layout="@layout/feature_test_1_layout">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_second_fragment"
+        android:name="ua.com.dekalo.multimodule.featuretest2.Test2FeatureFragment"
+        tools:layout="@layout/feature_test_2_layout">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_third_fragment"
+        android:name="ua.com.dekalo.multimodule.featuretest3purejava.Test3FeatureFragment"
+        tools:layout="@layout/feature_test_3_layout">
+
+    </fragment>
+
+</navigation>

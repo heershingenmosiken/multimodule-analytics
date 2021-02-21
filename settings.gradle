@@ -1,0 +1,6 @@
+include ':example:featureTest3PureJava'
+include ':example:featureTest2'
+include ':example:featureTest1'
+include ':example:app'
+include ':multimodule-analytics'
+rootProject.name = "Multimodule Analytics"
