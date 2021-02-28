@@ -1,9 +1,9 @@
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
-apply from: '../passwords.gradle'
+apply from: '../secrets.gradle'
 
 /**
- * This script is responsible for assertions-sdk publishing to maven repository.
+ * This script is responsible for SDK publishing to maven repository.
  */
 ext {
     sdkGroupId = 'com.heershingenmosiken'
@@ -13,24 +13,24 @@ ext {
      * This is list of libraries that we are going to publish.
      * Also it declares mapping from local module names to public names.
      */
-    assertionsSdkLibNames = [
+    sdkLibNames = [
             'multimodule-analytics': 'multimodule-analytics',
     ]
 }
 
 bintray {
-    user = getAssertionsBintrayUser()
-    key = getAssertionsBintrayApiKey()
+    user = getSecretValue('MM_ANALYTICS_BINTRAY_USER')
+    key = getSecretValue('MM_ANALYTICS_BINTRAY_API_KEY')
     publications = ['maven']
     publish = true
     pkg {
         repo = 'heershingenmosiken'
-        name = assertionsSdkLibNames[project.name]
+        name = sdkLibNames[project.name]
         userOrg = 'dekalo-stanislav'
         vcsUrl = 'https://github.com/heershingenmosiken/multimodule-analytics'
 
         version {
-            name = assertionsSdkVersion
+            name = sdkVersion
             released = new Date()
         }
     }
@@ -40,14 +40,14 @@ publishing {
     publications {
         maven(MavenPublication) {
 
-            groupId assertionsSdkGroupId
-            artifactId assertionsSdkLibNames[project.name]
-            version assertionsSdkVersion
+            groupId sdkGroupId
+            artifactId sdkLibNames[project.name]
+            version sdkVersion
 
             pom {
                 name = 'Multimodule Analytics'
                 description = 'Library that allow easier multimodule analytics setup for Android applications'
-                url = 'https://github.com/heershingenmosiken/assertions-android'
+                url = 'https://github.com/heershingenmosiken/multimodule-analytics'
 
                 licenses {
                     license {
@@ -69,14 +69,14 @@ publishing {
                             dependencyNode.appendNode('groupId', it.group)
                             dependencyNode.appendNode('artifactId', it.name)
                             dependencyNode.appendNode('version', it.version)
-                        } else if (assertionsSdkLibNames[it.name]) {
+                        } else if (sdkLibNames[it.name]) {
                             /**
                              * It is local project dependency and it is declared in sdkLibNames above.
                              */
                             def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', assertionsSdkGroupId)
-                            dependencyNode.appendNode('artifactId', assertionsSdkLibNames[it.name])
-                            dependencyNode.appendNode('version', assertionsSdkVersion)
+                            dependencyNode.appendNode('groupId', sdkGroupId)
+                            dependencyNode.appendNode('artifactId', sdkLibNames[it.name])
+                            dependencyNode.appendNode('version', sdkVersion)
                         }
                     }
                 }
