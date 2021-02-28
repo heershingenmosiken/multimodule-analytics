@@ -1,6 +1,6 @@
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
-apply from: '../passwords.gradle'
+apply from: '../secrets.gradle'
 
 /**
  * This script is responsible for SDK publishing to maven repository.
@@ -19,8 +19,8 @@ ext {
 }
 
 bintray {
-    user = getAssertionsBintrayUser()
-    key = getAssertionsBintrayApiKey()
+    user = getSecretValue('MM_ANALYTICS_BINTRAY_USER')
+    key = getSecretValue('MM_ANALYTICS_BINTRAY_API_KEY')
     publications = ['maven']
     publish = true
     pkg {

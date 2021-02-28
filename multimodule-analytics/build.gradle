@@ -35,4 +35,4 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 }
 
-apply from: '../sdk.gradle'
+apply from: '../sdk.publish.android.gradle'

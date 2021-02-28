@@ -29,7 +29,7 @@ cache:
 
 branches:
   only:
-    - master]
+    - master
     - "/^release.*/"    # release branches
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
       script: ./gradlew clean lint test build
     - stage: publish
       if: (branch = master OR branch =~ /^release.*/) AND type = push # publishing only changes from master
-      script: ./jcenter.publish.attempt.sh
+      script: ./bintray.publish.attempt.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
