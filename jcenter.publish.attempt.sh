@@ -50,7 +50,7 @@ fi
 
 ### Publishing
 
-if ./gradlew artifactoryPublish artifactoryDeploy; then
+if ./gradlew bintrayUpload bintrayPublish; then
   git tag $SDK_VERSION -a -m "$SDK_VERSION" HEAD
   git push -q origin $SDK_VERSION
   echo "$SDK_VERSION successfully published."

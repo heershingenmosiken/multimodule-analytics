@@ -29,14 +29,15 @@ cache:
 
 branches:
   only:
-    - master
+    - master]
+    - "/^release.*/"    # release branches
 
 jobs:
   include:
     - stage: build & test
       script: ./gradlew clean lint test build
     - stage: publish
-      if: branch = master AND type = push # publishing only changes from master
+      if: (branch = master OR branch =~ /^release.*/) AND type = push # publishing only changes from master
       script: ./jcenter.publish.attempt.sh
 
 after_success:
